@@ -5,16 +5,18 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace DotNetBestPractices.Api
 {
     public static class Configuration
     {
-        public static IServiceCollection ConfigureService(IServiceCollection services)
+        public static IServiceCollection ConfigureService(IServiceCollection services, IConfiguration config)
         {
             return services
                 .AddCustomMvc()
-                .AddMultimediaServices();
+                .AddMultimediaServices()
+                .AddCustomOptions(config);
         }
 
         public static IApplicationBuilder Configure(IApplicationBuilder app,

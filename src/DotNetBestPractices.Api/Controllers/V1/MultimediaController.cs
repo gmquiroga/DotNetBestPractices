@@ -35,6 +35,7 @@ namespace DotNetBestPractices.Api.Controllers.V1
         public async Task<IActionResult> GetImage(/*string pFileName*/)
         {
             Logger.LogInformation("MultimediaController GetImage");
+            Logger.LogInformation("MultimediaPath: {0}", this.MultimediaServiceOptions.MultimediaPath);
             string mResult = await MultimediaService.GetImageAsync("GetImegeFromService");
             return Ok(mResult);
         }

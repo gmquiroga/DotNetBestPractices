@@ -26,7 +26,7 @@ namespace DotNetBestPractices.Host
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
-            Api.Configuration.ConfigureService(services);
+            Api.Configuration.ConfigureService(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

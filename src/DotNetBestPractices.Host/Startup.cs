@@ -26,6 +26,8 @@ namespace DotNetBestPractices.Host
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
+            services.AddCustomApiVersioning();
+
             Api.Configuration.ConfigureService(services, Configuration);
         }
 

@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace DotNetBestPractices.Api.Controllers.V1
 {
     [ApiController]
-    [Route("api/multimedia")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class MultimediaController: ControllerBase
     {
         

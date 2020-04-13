@@ -13,9 +13,10 @@ namespace DotNetBestPractices.Api
     {
         public static IServiceCollection ConfigureService(IServiceCollection services, IConfiguration config)
         {
+            ApplicationCore.Configuration.ConfigureService(services);
+
             return services
                 .AddCustomMvc()
-                .AddMultimediaServices()
                 .AddCustomOptions(config);
         }
 

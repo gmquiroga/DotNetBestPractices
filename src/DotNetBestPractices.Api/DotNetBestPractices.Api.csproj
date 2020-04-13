@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotNetBestPractices.Infraestructure\DotNetBestPractices.Infraestructure.csproj" />
+    <ProjectReference Include="..\DotNetBestPractices.ApplicationCore\DotNetBestPractices.ApplicationCore.csproj" />
   </ItemGroup>
 
 </Project>

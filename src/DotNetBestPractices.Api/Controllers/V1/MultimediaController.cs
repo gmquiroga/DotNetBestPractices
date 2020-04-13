@@ -1,4 +1,4 @@
-﻿using DotNetBestPractices.Api.Services;
+﻿using DotNetBestPractices.ApplicationCore.Services;
 using DotNetBestPractices.Infraestructure;
 using DotNetBestPractices.Infraestructure.Options;
 using Microsoft.AspNetCore.Mvc;
@@ -32,12 +32,12 @@ namespace DotNetBestPractices.Api.Controllers.V1
         }
 
         [HttpGet]
-        [Route("GetImage")]
-        public async Task<IActionResult> GetImage(/*string pFileName*/)
+        [Route("GetImage/{pFileName}")]
+        public async Task<IActionResult> GetImage(string pFileName)
         {
-            Logger.LogInformation("MultimediaController GetImage");
+            Logger.LogInformation("Obteniendo imagen: {0}", pFileName);
             Logger.LogInformation("MultimediaPath: {0}", this.MultimediaServiceOptions.MultimediaPath);
-            string mResult = await MultimediaService.GetImageAsync("GetImegeFromService");
+            var mResult = await MultimediaService.GetImageAsync(pFileName);
             return Ok(mResult);
         }
     }

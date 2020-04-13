@@ -1,5 +1,5 @@
-﻿using DotNetBestPractices.Api.Services;
-using DotNetBestPractices.Infraestructure.Options;
+﻿using DotNetBestPractices.Infraestructure.Options;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,14 +13,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddCustomMvc(this IServiceCollection services)
         {
             return services
-                .AddMvcCore().Services;
+                .AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_3_0).Services;
         }
-        
-        public static IServiceCollection AddMultimediaServices(this IServiceCollection services)
-        {
-            return services.AddSingleton<IMultimediaService, MultimediaService>();
-        }
-
+       
         public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration pConfiguration)
         {
             return services.Configure<MultimediaServiceOptions>(pConfiguration.GetSection(nameof(MultimediaServiceOptions)));

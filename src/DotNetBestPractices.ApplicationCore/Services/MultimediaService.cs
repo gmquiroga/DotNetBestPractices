@@ -25,6 +25,10 @@ namespace DotNetBestPractices.ApplicationCore.Services
 
         Task<FileStream> IMultimediaService.GetImageAsync(string pFileName)
         {
+            if(!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, pFileName)))
+            {
+                throw new FileNotFoundException();
+            }
             FileStream mImage = File.Open(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, pFileName), FileMode.Open, FileAccess.Read, FileShare.Read);
 
             Logger.LogInformation("MultimediaService GetImageAsync");

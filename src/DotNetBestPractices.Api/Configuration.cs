@@ -6,17 +6,19 @@ using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Hellang.Middleware.ProblemDetails;
 
 namespace DotNetBestPractices.Api
 {
     public static class Configuration
     {
-        public static IServiceCollection ConfigureService(IServiceCollection services, IConfiguration config)
+        public static IServiceCollection ConfigureService(IServiceCollection services, IConfiguration config, IWebHostEnvironment environment)
         {
             ApplicationCore.Configuration.ConfigureService(services);
 
             return services
                 .AddCustomMvc()
+                .AddCustomProblemDetails(environment)
                 .AddCustomOptions(config);
         }
 
@@ -24,6 +26,7 @@ namespace DotNetBestPractices.Api
                                                     Func<IApplicationBuilder, IApplicationBuilder> configureHost)
         {
             return configureHost(app)
+                .UseProblemDetails()
                 .UseRouting()
                 .UseEndpoints(endpoints =>
                 {

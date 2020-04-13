@@ -1,6 +1,8 @@
 ﻿using DotNetBestPractices.Infraestructure.Options;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Hellang.Middleware.ProblemDetails;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,5 +22,15 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             return services.Configure<MultimediaServiceOptions>(pConfiguration.GetSection(nameof(MultimediaServiceOptions)));
         }
+
+        public static IServiceCollection AddCustomProblemDetails(this IServiceCollection services, IWebHostEnvironment environment)
+        {
+            return services
+                .AddProblemDetails(configure =>
+                {
+                    configure.IncludeExceptionDetails = _ => environment.EnvironmentName == "Development";
+                });
+        }
+        
     }
 }

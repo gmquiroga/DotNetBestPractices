@@ -18,12 +18,14 @@ namespace DotNetBestPractices.Host
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        private IWebHostEnvironment Environment { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,7 +34,7 @@ namespace DotNetBestPractices.Host
             services.AddCustomApiVersioning();
             services.AddCustomSwaggerGen();
 
-            Api.Configuration.ConfigureService(services, Configuration);
+            Api.Configuration.ConfigureService(services, Configuration, Environment);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,7 +18,7 @@ namespace DotNetBestPractices.Api
 
             return services
                 .AddCustomMvc()
-                .AddCustomProblemDetails(environment)
+                .AddProblemDetails()
                 .AddCustomOptions(config);
         }
 

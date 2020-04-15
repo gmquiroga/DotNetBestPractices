@@ -7,3 +7,4 @@
 - Api documentation with Swagger
 - ProblemsDetails for Api errors - RFC 7807
 - Clean Controllers with services
+- Unit Testing with xUnit

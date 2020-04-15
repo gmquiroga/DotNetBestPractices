@@ -1,4 +1,5 @@
-﻿using DotNetBestPractices.Infraestructure;
+﻿using DotNetBestPractices.ApplicationCore.Exceptions;
+using DotNetBestPractices.Infraestructure;
 using DotNetBestPractices.Infraestructure.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -16,20 +17,22 @@ namespace DotNetBestPractices.ApplicationCore.Services
         private readonly ILogger<MultimediaServiceLogCategory> Logger;
         private readonly MultimediaServiceOptions MultimediaServiceOptions;
 
-        public MultimediaService(ILogger<MultimediaServiceLogCategory> pLogger, IOptionsSnapshot<MultimediaServiceOptions> pOptions)
+        public MultimediaService(ILogger<MultimediaServiceLogCategory> logger, IOptionsSnapshot<MultimediaServiceOptions> options)
         {
-            Logger = pLogger;
-            MultimediaServiceOptions = pOptions.Value;
+            Logger = logger;
+            MultimediaServiceOptions = options.Value;
         }
 
 
-        Task<FileStream> IMultimediaService.GetImageAsync(string pFileName)
+        Task<FileStream> IMultimediaService.GetImageAsync(string fileName)
         {
-            if(!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, pFileName)))
+            
+            if(!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, fileName)))
             {
-                throw new FileNotFoundException();
+                throw new ImageNotFoundException();
             }
-            FileStream mImage = File.Open(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, pFileName), FileMode.Open, FileAccess.Read, FileShare.Read);
+            
+            FileStream mImage = File.Open(Path.Combine(Directory.GetCurrentDirectory(), MultimediaServiceOptions.MultimediaPath, fileName), FileMode.Open, FileAccess.Read, FileShare.Read);
 
             Logger.LogInformation("MultimediaService GetImageAsync");
             return Task.FromResult(mImage);

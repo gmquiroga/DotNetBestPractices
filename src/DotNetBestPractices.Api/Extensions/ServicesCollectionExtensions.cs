@@ -18,9 +18,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_3_0).Services;
         }
        
-        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration pConfiguration)
+        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.Configure<MultimediaServiceOptions>(pConfiguration.GetSection(nameof(MultimediaServiceOptions)));
+            return services.Configure<MultimediaServiceOptions>(configuration.GetSection(nameof(MultimediaServiceOptions)));
         }
 
         public static IServiceCollection AddCustomProblemDetails(this IServiceCollection services, IWebHostEnvironment environment)

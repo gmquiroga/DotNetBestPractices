@@ -22,22 +22,25 @@ namespace DotNetBestPractices.Api.Controllers.V1
         private readonly MultimediaServiceOptions MultimediaServiceOptions;
         
 
-        public MultimediaController(IMultimediaService pMultimediaService, IOptionsSnapshot<MultimediaServiceOptions> pOptions, ILogger<MultimediaServiceLogCategory> pLogger)
+        public MultimediaController(IMultimediaService multimediaService, IOptionsSnapshot<MultimediaServiceOptions> options, ILogger<MultimediaServiceLogCategory> logger)
         {
             
-            this.MultimediaService = pMultimediaService;
-            this.Logger = pLogger;
-            this.MultimediaServiceOptions = pOptions.Value;
+            this.MultimediaService = multimediaService;
+            this.Logger = logger;
+            this.MultimediaServiceOptions = options.Value;
             
         }
 
         [HttpGet]
         [Route("GetImage/{pFileName}")]
-        public async Task<IActionResult> GetImage(string pFileName)
+        public async Task<IActionResult> GetImage(string fileName)
         {
-            Logger.LogInformation("Obteniendo imagen: {0}", pFileName);
+            System.IO.FileStream mResult;
+            Logger.LogInformation("Obteniendo imagen: {0}", fileName);
             Logger.LogInformation("MultimediaPath: {0}", this.MultimediaServiceOptions.MultimediaPath);
-            var mResult = await MultimediaService.GetImageAsync(pFileName);
+            
+            mResult = await MultimediaService.GetImageAsync(fileName);
+            
             return Ok(mResult);
         }
     }

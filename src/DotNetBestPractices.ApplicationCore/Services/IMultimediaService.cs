@@ -8,7 +8,7 @@ namespace DotNetBestPractices.ApplicationCore.Services
 {
     public interface IMultimediaService
     {
-        Task<FileStream> GetImageAsync(string pFileName);
+        Task<FileStream> GetImageAsync(string fileName);
 
     }
 }

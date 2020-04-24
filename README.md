@@ -1,6 +1,7 @@
 # DotNetBestPractices
 
 - Separation of concerns: Separate Host than api.
+- Api versioning
 - Clean StartUp class with extension methods.
 - Read configuration with IOptionsSnapshot to detect changes without application restart
 - Custom logging with Serilog and their async logging
